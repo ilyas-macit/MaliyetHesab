@@ -107,6 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
       toplam += sonuc;
     }
 
+    const ormeFiyat = document.getElementById("ormefason");
+
+    if (ormeFiyat) {
+      const ormeValue = parseFloat(ormeFiyat.value) || 0;
+      toplam += ormeValue;
+    }
+
     // Ham Mal. ve USD karşılığı
     const hamMalTd = document.querySelector(
       ".sonuc table.table-alt tbody tr:first-child th:nth-child(2)"
