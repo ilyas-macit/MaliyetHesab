@@ -60,8 +60,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamMalTd = document.querySelector(
       ".sonuc table.table-alt tbody tr:first-child th:nth-child(2)"
     );
+    const hamMalUsdTd = document.querySelector(
+      ".sonuc table.table-alt tbody tr:first-child th:nth-child(3)"
+    );
     if (hamMalTd) {
       hamMalTd.textContent = toplam.toFixed(2) + "₺";
+      // USD karşılığını da ekle
+      if (usdTry > 0) {
+        const usdValue = toplam / usdTry;
+        hamMalUsdTd.textContent = `${usdValue.toFixed(2)}$`;
+      }
     }
   }
 
