@@ -64,7 +64,7 @@
                 />
               </td>
               <td width="5%">
-                <input name="kur" type="radio" value="1" />
+                <input name="kur" type="radio" value="1" checked />
               </td>
 
               <td width="25%">
@@ -79,7 +79,7 @@
               </td>
 
               <td width="5%">
-                <input type="radio" name="kur" value="2" checked="checked" />
+                <input type="radio" name="kur" value="2" />
               </td>
 
               <td width="5%">
@@ -131,7 +131,7 @@
             </tr>
 
             <tr>
-              <td>
+              <td width="45%">
                 <input
                   name="iplik3"
                   type="text"
@@ -167,7 +167,7 @@
             </tr>
 
             <tr>
-              <td>
+              <td width="45%">
                 <input
                   name="iplik4"
                   type="text"
@@ -179,7 +179,7 @@
                 />
               </td>
               <td>
-                <input name="kur4" type="radio" value="1" />
+                <input name="kur4" type="radio" value="1" checked />
               </td>
 
               <td width="25%">
@@ -193,7 +193,7 @@
               </td>
 
               <td>
-                <input type="radio" name="kur4" value="2" checked="checked" />
+                <input type="radio" name="kur4" value="2" />
               </td>
 
               <td><input name="oran4" type="number" step="any" value="" /></td>
@@ -202,7 +202,7 @@
             </tr>
 
             <tr>
-              <td>
+              <td width="45%">
                 <input
                   name="iplik5"
                   type="text"
@@ -215,7 +215,7 @@
               </td>
 
               <td>
-                <input name="kur5" type="radio" value="1" />
+                <input name="kur5" type="radio" value="1" checked />
               </td>
 
               <td width="25%">
@@ -255,12 +255,7 @@
 
                 <tr>
                   <td width="25%">
-                    <input
-                      name="ormefason"
-                      type="number"
-                      step="any"
-                      value="2"
-                    />
+                    <input name="ormefason" type="number" step="any" value="" />
                   </td>
 
                   <td width="25%">
@@ -269,22 +264,23 @@
                       type="number"
                       step="any"
                       id="iplik12"
-                      value="9"
+                      value=""
                     />
                   </td>
 
                   <td width="25%">
-                    <input name="boyafire" type="number" step="any" value="8" />
+                    <input name="boyafire" type="number" step="any" value="" />
                   </td>
 
                   <td width="25%">
-                    <input name="kar" type="number" step="any" value="1" />
+                    <input name="kar" type="number" step="any" value="" />
                   </td>
                 </tr>
 
                 <tr>
                   <td colspan="4">
                     <textarea
+                      style="width: 100%"
                       name="not"
                       id="not"
                       placeholder="NOT:"
@@ -307,7 +303,7 @@
                 <tr>
                   <th width="55%">Ham Mal.:</th>
 
-                  <th width="15%">2,00₺</th>
+                  <th width="15%">0,00₺</th>
 
                   <th width="15%">0,00$</th>
 
@@ -317,7 +313,7 @@
                 <tr>
                   <th width="55%">Ham Satis:</th>
 
-                  <th width="15%">2,02₺</th>
+                  <th width="15%">0,00₺</th>
 
                   <th width="15%">0,00$</th>
 
@@ -325,15 +321,15 @@
                 </tr>
               </tbody>
             </table>
-            <span class="kirmizi"
-              >Uyari Az &gt;&gt;&gt; Kumas Orani %0 Oldu.</span
-            >
+            <div class="kirmizi" style="display: none" id="uyari">
+              Uyari Az &gt;&gt;&gt; Kumas Orani %0 Oldu.
+            </div>
             <table class="table table-alt">
               <tbody>
                 <tr>
                   <th width="55%">Boyali Mal:</th>
 
-                  <th width="15%">11,96₺</th>
+                  <th width="15%">0,00₺</th>
 
                   <th width="15%">0,00$</th>
 
@@ -343,7 +339,7 @@
                 <tr>
                   <th width="55%">Boyali Satis:</th>
 
-                  <th width="15%">12,08₺</th>
+                  <th width="15%">0,00₺</th>
 
                   <th width="15%">0,00$</th>
 

@@ -70,7 +70,6 @@ body {
 .table input[type="text"],
 .table input[type="number"],
 .table textarea {
-  width: 100%;
   padding: 12px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
@@ -136,4 +135,9 @@ input[type="submit"]:hover {
 .row {
   display: flex;
   justify-content: space-between;
+}
+
+td[width="45%"] > input {
+  width: 100%;
+  box-sizing: border-box; /* Taşmayı önler */
 }
