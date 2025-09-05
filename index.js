@@ -5,12 +5,47 @@ document.addEventListener("DOMContentLoaded", function () {
     var totalOran = 0;
     const uyariDiv = document.getElementById("uyari");
     uyariDiv.style.display = "none";
+
+    for (let i = 1; i <= 5; i++) {
+      const fiyatInput = document.querySelector(`#fiyat${i === 1 ? "" : i}`);
+      const oranInput = document.querySelector(
+        `[name="oran${i === 1 ? "" : i}"]`
+      );
+      const fireInput = document.querySelector(
+        `[name="fire${i === 1 ? "" : i}"]`
+      );
+      const iplikInput = document.querySelector(`#iplik${i === 1 ? "" : i}`);
+
+      const fiyat = fiyatInput.value.trim();
+      const oran = oranInput.value.trim();
+      const fire = fireInput.value.trim();
+      const iplik = iplikInput ? iplikInput.value.trim() : "";
+
+      const alanlar = [iplikInput, fiyatInput, oranInput, fireInput];
+      const degerler = [iplik, fiyat, oran, fire];
+      const doluSayisi = degerler.filter((v) => v !== "").length;
+
+      if (doluSayisi > 0 && doluSayisi < alanlar.length) {
+        alanlar.forEach((input, idx) => {
+          if (input && degerler[idx] === "") {
+            input.style.border = "2px solid red";
+          } else if (input) {
+            input.style.border = "";
+          }
+        });
+      } else {
+        alanlar.forEach((input) => {
+          if (input) input.style.border = "";
+        });
+      }
+    }
+
+    var totalOran = 0;
     for (let i = 1; i <= 5; i++) {
       const oran =
         parseFloat(
           document.querySelector(`[name="oran${i === 1 ? "" : i}"]`).value
         ) || 0;
-
       totalOran += oran;
     }
 
