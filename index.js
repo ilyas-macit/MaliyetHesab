@@ -1,69 +1,34 @@
-document.getElementById("date").innerHTML = new Date().toLocaleDateString();
+let usdTry = 1; // Varsayılan değer
+
+function dovizGetir() {
+  fetch(
+    "https://v6.exchangerate-api.com/v6/8e39bbb783d6097cd7b38bf2/latest/USD"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      usdTry = data.conversion_rates.TRY;
+      // İsterseniz ekrana da yazabilirsiniz
+      const usdTd = document.querySelector('td[style*="$"]');
+      if (usdTd) {
+        usdTd.textContent = `$ ${usdTry.toFixed(2)}`;
+      }
+    })
+    .catch((error) => {
+      console.error("Döviz bilgisi alınamadı:", error);
+    });
+}
 
 document.addEventListener("DOMContentLoaded", function () {
+  dovizGetir();
+
   function hesaplaHamMal() {
+    // Artık usdTry değişkenini kullanabilirsiniz
     var totalOran = 0;
     const uyariDiv = document.getElementById("uyari");
     uyariDiv.style.display = "none";
 
-    for (let i = 1; i <= 5; i++) {
-      const fiyatInput = document.querySelector(`#fiyat${i === 1 ? "" : i}`);
-      const oranInput = document.querySelector(
-        `[name="oran${i === 1 ? "" : i}"]`
-      );
-      const fireInput = document.querySelector(
-        `[name="fire${i === 1 ? "" : i}"]`
-      );
-      const iplikInput = document.querySelector(`#iplik${i === 1 ? "" : i}`);
+    // ...mevcut kodlarınız...
 
-      const fiyat = fiyatInput.value.trim();
-      const oran = oranInput.value.trim();
-      const fire = fireInput.value.trim();
-      const iplik = iplikInput ? iplikInput.value.trim() : "";
-
-      const alanlar = [iplikInput, fiyatInput, oranInput, fireInput];
-      const degerler = [iplik, fiyat, oran, fire];
-      const doluSayisi = degerler.filter((v) => v !== "").length;
-
-      if (doluSayisi > 0 && doluSayisi < alanlar.length) {
-        alanlar.forEach((input, idx) => {
-          if (input && degerler[idx] === "") {
-            input.style.border = "2px solid red";
-          } else if (input) {
-            input.style.border = "";
-          }
-        });
-      } else {
-        alanlar.forEach((input) => {
-          if (input) input.style.border = "";
-        });
-      }
-    }
-
-    var totalOran = 0;
-    for (let i = 1; i <= 5; i++) {
-      const oran =
-        parseFloat(
-          document.querySelector(`[name="oran${i === 1 ? "" : i}"]`).value
-        ) || 0;
-      totalOran += oran;
-    }
-
-    if (totalOran > 100) {
-      uyariDiv.style.display = "block";
-      uyariDiv.textContent = `Uyari Az >>> Kumas Orani %${totalOran} Oldu.`;
-      return;
-    }
-
-    if (totalOran < 100) {
-      uyariDiv.style.display = "block";
-      uyariDiv.textContent = `Uyari Az >>> Kumas Orani %${totalOran} Oldu.`;
-      return;
-    }
-
-    if (totalOran === 100) {
-      uyariDiv.style.display = "none";
-    }
     let toplam = 0;
     for (let i = 1; i <= 5; i++) {
       const fiyat =
@@ -81,7 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
       let sonuc = fiyat * (oran / 100);
 
       sonuc += sonuc * (fire / 100);
+      var radio = document.querySelector(
+        `[name="kur${i === 1 ? "" : i}"]:checked`
+      ).value;
+      if (radio === "2") {
+        console.log("Güncel USD/TRY:", usdTry);
 
+        sonuc *= usdTry; // Burada güncel döviz değerini kullanıyoruz
+      }
       toplam += sonuc;
     }
 
