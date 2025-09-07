@@ -1,9 +1,8 @@
+import { API_KEY } from "./config.js";
 let usdTry = 1; // Varsayılan değer
 
 function dovizGetir() {
-  fetch(
-    "https://v6.exchangerate-api.com/v6/8e39bbb783d6097cd7b38bf2/latest/USD"
-  )
+  fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`)
     .then((response) => response.json())
     .then((data) => {
       usdTry = data.conversion_rates.TRY;
