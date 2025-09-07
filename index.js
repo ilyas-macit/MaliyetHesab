@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   dovizGetir();
 
   function hesaplaHamMal() {
+    console.log("Güncel USD/TRY:", usdTry);
     let toplam = 0;
     let oranToplam = 0;
     const uyariDiv = document.getElementById("uyari");
