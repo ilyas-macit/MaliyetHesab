@@ -1,14 +1,19 @@
 import { API_KEY } from "./config.js";
 let usdTry = 1; // Varsayılan değer
-
+let usdEuro = 1; // Varsayılan değer
 function dovizGetir() {
   fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`)
     .then((response) => response.json())
     .then((data) => {
       usdTry = data.conversion_rates.TRY;
+      usdEuro = data.conversion_rates.EUR;
       const usdTd = document.querySelector('td[style*="$"]');
+      const euroTd = document.querySelector('td[style*="€"]');
       if (usdTd) {
         usdTd.textContent = `$ ${usdTry.toFixed(2)}`;
+      }
+      if (euroTd) {
+        euroTd.textContent = `€ ${usdEuro.toFixed(2)}`;
       }
     })
     .catch((error) => {
@@ -21,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function hesaplaHamMal() {
     console.log("Güncel USD/TRY:", usdTry);
+    console.log("Güncel EUR/TRY:", usdEuro);
     let toplam = 0;
     let oranToplam = 0;
     const uyariDiv = document.getElementById("uyari");
@@ -121,12 +127,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamMalUsdTd = document.querySelector(
       ".sonuc table.table-alt tbody tr:first-child th:nth-child(3)"
     );
+    const hamMalEuTd = document.querySelector(
+      ".sonuc table.table-alt tbody tr:first-child th:nth-child(4)"
+    );
     if (hamMalTd) {
       hamMalTd.textContent = toplam.toFixed(2) + "₺";
       if (usdTry > 0 && hamMalUsdTd) {
         const usdValue = toplam / usdTry;
         hamMalUsdTd.textContent = `${usdValue.toFixed(2)}$`;
       }
+    }
+    if (hamMalEuTd) {
+      const euValue = toplam / usdTry / usdEuro;
+      hamMalEuTd.textContent = `${euValue.toFixed(2)}€`;
     }
 
     // Kar oranı ve Ham Satış
@@ -139,11 +152,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamSatisUSDId = document.querySelector(
       ".sonuc table.table-alt tbody tr:nth-child(2) th:nth-child(3)"
     );
+    const hamSatisEUId = document.querySelector(
+      ".sonuc table.table-alt tbody tr:nth-child(2) th:nth-child(4)"
+    );
     if (hamSatisTd) {
       hamSatisTd.textContent = hamSatis.toFixed(2) + "₺";
     }
     if (hamSatisUSDId) {
       hamSatisUSDId.textContent = `${(hamSatis / usdTry).toFixed(2)}$`;
+    }
+    if (hamSatisEUId) {
+      hamSatisEUId.textContent = `${(hamSatis / usdTry / usdEuro).toFixed(2)}€`;
     }
 
     const boyafasonInput = document.getElementById("boyafason");
@@ -163,7 +182,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const bolayiMaliyetUsdId = document.querySelector(
       "#boyaliTablo tr:nth-child(1) th:nth-child(3)"
     );
-
+    const bolayiMaliyetEuId = document.querySelector(
+      "#boyaliTablo tr:nth-child(1) th:nth-child(4)"
+    );
     if (boyaliMaliyetId) {
       boyaliMaliyetId.textContent = boyaliMaliyet.toFixed(2) + "₺";
     }
@@ -173,6 +194,13 @@ document.addEventListener("DOMContentLoaded", function () {
         2
       )}$`;
     }
+    if (bolayiMaliyetEuId) {
+      bolayiMaliyetEuId.textContent = `${(
+        boyaliMaliyet /
+        usdTry /
+        usdEuro
+      ).toFixed(2)}€`;
+    }
 
     let boyaliSatis = boyaliMaliyet + (boyaliMaliyet * karOrani) / 100;
     const boyaliSatisId = document.querySelector(
@@ -181,12 +209,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const bolayiSatisUsdId = document.querySelector(
       "#boyaliTablo tr:nth-child(2) th:nth-child(3)"
     );
-
+    const bolayiSatisEuId = document.querySelector(
+      "#boyaliTablo tr:nth-child(2) th:nth-child(4)"
+    );
     if (boyaliSatisId) {
       boyaliSatisId.textContent = boyaliSatis.toFixed(2) + "₺";
     }
     if (bolayiSatisUsdId) {
       bolayiSatisUsdId.textContent = `${(boyaliSatis / usdTry).toFixed(2)}$`;
+    }
+    if (bolayiSatisEuId) {
+      bolayiSatisEuId.textContent = `${(boyaliSatis / usdTry / usdEuro).toFixed(
+        2
+      )}€`;
     }
   }
   document
