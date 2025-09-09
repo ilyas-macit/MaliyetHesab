@@ -137,9 +137,17 @@ input[type="submit"]:hover {
   justify-content: space-between;
 }
 
-td[width="45%"] > input {
+td[width="30%"] > input {
   width: 100%;
   box-sizing: border-box; /* Taşmayı önler */
+}
+
+.td-fiyat {
+  width: 40%;
+}
+
+input {
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {
@@ -153,6 +161,9 @@ td[width="45%"] > input {
   .table th,
   .table td {
     padding: 8px;
+  }
+  .td-fiyat {
+    width: 70%;
   }
   .table input[type="text"],
   .table input[type="number"] {
